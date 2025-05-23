@@ -10,20 +10,9 @@ public class Tile {
   private ArrayList<Tile> neighbouringTiles;
   private TileType tileType;
 
-  public Tile(int column, int row) {
-    setColumn(column);
+  public Tile(int row, int column) {
     setRow(row);
-  }
-
-  public void setColumn(int column) {
-    if (column < 0) {
-      throw new IllegalArgumentException("column can not be a negative number");
-    }
-    this.column = column;
-  }
-
-  public int getColumn() {
-    return this.column;
+    setColumn(column);
   }
 
   public void setRow(int row) {
@@ -35,6 +24,17 @@ public class Tile {
 
   public int getRow() {
     return this.row;
+  }
+
+  public void setColumn(int column) {
+    if (column < 0) {
+      throw new IllegalArgumentException("column can not be a negative number");
+    }
+    this.column = column;
+  }
+
+  public int getColumn() {
+    return this.column;
   }
 
   public void setTileType(TileType tileType) {
