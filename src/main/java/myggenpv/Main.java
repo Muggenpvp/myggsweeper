@@ -1,10 +1,11 @@
 package myggenpv;
 
+import myggenpv.engine.BoardFactory;
 import myggenpv.entity.Tile;
+import myggenpv.entity.Board;
 
 public class Main {
   public static void main(String[] args) {
-    Tile tile = new Tile(4, 5);
-    System.out.println("Row: " + tile.getRow() + " Column: " + tile.getColumn());
+    Board board = new BoardFactory().createBoard(4, 4, 0);
   }
 }
