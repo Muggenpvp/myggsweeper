@@ -16,4 +16,8 @@ public class Board {
   public HashMap<String, Tile> getTiles() {
     return this.tiles;
   }
+
+  public Tile getTile(int row, int column) {
+    return this.tiles.get(row + "," + column);
+  }
 }

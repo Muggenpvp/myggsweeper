@@ -52,4 +52,8 @@ public class Tile {
   public ArrayList<Tile> getNeighbouringTiles() {
     return this.neighbouringTiles;
   }
+
+  public void execute() {
+    this.tileType.execute();
+  }
 }

@@ -6,6 +6,6 @@ import myggenpv.entity.Board;
 
 public class Main {
   public static void main(String[] args) {
-    Board board = new BoardFactory().createBoard(4, 4, 0);
+    Board board = new BoardFactory().createBoard(4, 5, 5);
   }
 }
