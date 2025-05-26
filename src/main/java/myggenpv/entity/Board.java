@@ -20,4 +20,28 @@ public class Board {
   public Tile getTile(int row, int column) {
     return this.tiles.get(row + "," + column);
   }
+
+  public int getColumns() {
+    int highestColumn = 0;
+
+    for (Tile tile : tiles.values()) {
+      if (tile.getColumn() > highestColumn) {
+        highestColumn = tile.getColumn();
+      }
+    }
+
+    return highestColumn + 1;
+  }
+
+  public int getRows() {
+    int highestRow = 0;
+
+    for (Tile tile : tiles.values()) {
+      if (tile.getRow() > highestRow) {
+        highestRow = tile.getRow();
+      }
+    }
+
+    return highestRow + 1;
+  }
 }

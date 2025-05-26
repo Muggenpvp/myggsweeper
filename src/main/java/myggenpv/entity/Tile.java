@@ -9,6 +9,7 @@ public class Tile {
   private int row;
   private ArrayList<Tile> neighbouringTiles;
   private TileType tileType;
+  private boolean isRevealed = false;
 
   public Tile(int row, int column) {
     setRow(row);
@@ -53,7 +54,41 @@ public class Tile {
     return this.neighbouringTiles;
   }
 
+  public boolean isRevealed() {
+    return this.isRevealed;
+  }
+
+  public void setRevealed(boolean state) {
+    this.isRevealed = state;
+  }
+
+  public int calculateNeighbouringMyggs() {
+    int myggs = 0;
+
+    for (Tile neigbouringTile : this.neighbouringTiles) {
+      if (neigbouringTile.getTileType() != null && neigbouringTile.getTileType().getType().equals("MYGG")) {
+        myggs += 1;
+      }
+    }
+
+    return myggs;
+  }
+
+  public void revealNeighbours() {
+    for (Tile neighbouringTile : this.neighbouringTiles) {
+      if (!neighbouringTile.isRevealed()) {
+        neighbouringTile.setRevealed(true);
+        if (neighbouringTile.calculateNeighbouringMyggs() == 0) {
+          neighbouringTile.revealNeighbours();
+        }
+      }
+    }
+  }
+
   public void execute() {
-    this.tileType.execute();
+    setRevealed(true);
+    if (this.tileType != null) {
+      this.tileType.execute();
+    }
   }
 }

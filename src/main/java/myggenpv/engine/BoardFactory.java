@@ -4,6 +4,7 @@ import myggenpv.entity.Board;
 import myggenpv.entity.Tile;
 import myggenpv.entity.tiletypes.Mygg;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -13,7 +14,7 @@ public class BoardFactory {
 
     Board board = new Board();
     board.setTiles(createTiles(rows, columns));
-
+    setNeighbouringTiles(board);
     generateMyggs(rows, columns, myggs, board);
 
     return board;
@@ -51,6 +52,48 @@ public class BoardFactory {
         generateMygg(row, column, board);
         amountGenerated++;
       }
+    }
+  }
+
+  public void setNeighbouringTiles(Board board) {
+    for (Tile tile : board.getTiles().values()) {
+      ArrayList<Tile> neighbouringTiles = new ArrayList<>();
+
+      Tile topLeft = board.getTile(tile.getRow()+1, tile.getColumn()-1);
+      Tile topCenter = board.getTile(tile.getRow()+1, tile.getColumn());
+      Tile topRight = board.getTile(tile.getRow()+1, tile.getColumn()+1);
+      Tile left = board.getTile(tile.getRow(), tile.getColumn()-1);
+      Tile right = board.getTile(tile.getRow(), tile.getColumn()+1);
+      Tile bottomLeft = board.getTile(tile.getRow()-1, tile.getColumn()-1);
+      Tile bottomCenter = board.getTile(tile.getRow()-1, tile.getColumn());
+      Tile bottomRight = board.getTile(tile.getRow()-1, tile.getColumn()+1);
+
+      if (topLeft != null) {
+        neighbouringTiles.add(topLeft);
+      }
+      if (topCenter != null) {
+        neighbouringTiles.add(topCenter);
+      }
+      if (topRight != null) {
+        neighbouringTiles.add(topRight);
+      }
+      if (left != null) {
+        neighbouringTiles.add(left);
+      }
+      if (right != null) {
+        neighbouringTiles.add(right);
+      }
+      if (bottomLeft != null) {
+        neighbouringTiles.add(bottomLeft);
+      }
+      if (bottomCenter != null) {
+        neighbouringTiles.add(bottomCenter);
+      }
+      if (bottomRight != null) {
+        neighbouringTiles.add(bottomRight);
+      }
+
+      tile.setNeighbouringTiles(neighbouringTiles);
     }
   }
 }

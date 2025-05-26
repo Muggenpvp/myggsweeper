@@ -3,9 +3,13 @@ package myggenpv;
 import myggenpv.engine.BoardFactory;
 import myggenpv.entity.Tile;
 import myggenpv.entity.Board;
+import myggenpv.ui.MyggSweeperApp;
 
 public class Main {
   public static void main(String[] args) {
-    Board board = new BoardFactory().createBoard(4, 5, 5);
+    MyggSweeperApp myggSweeperApp = new MyggSweeperApp();
+
+    myggSweeperApp.init();
+    myggSweeperApp.start();
   }
 }
