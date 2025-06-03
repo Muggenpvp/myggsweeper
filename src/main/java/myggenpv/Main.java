@@ -7,9 +7,6 @@ import myggenpv.ui.MyggSweeperApp;
 
 public class Main {
   public static void main(String[] args) {
-    MyggSweeperApp myggSweeperApp = new MyggSweeperApp();
-
-    myggSweeperApp.init();
-    myggSweeperApp.start();
+    MyggSweeperApp.appMain(args);
   }
 }

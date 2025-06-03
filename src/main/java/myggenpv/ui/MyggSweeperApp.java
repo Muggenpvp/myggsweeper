@@ -1,50 +1,41 @@
 package myggenpv.ui;
 
+import javafx.application.Application;
+import javafx.geometry.Rectangle2D;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 import myggenpv.engine.BoardFactory;
+import myggenpv.engine.SceneController;
 import myggenpv.entity.Board;
-import myggenpv.entity.Tile;
 
-import java.util.Scanner;
 
-public class MyggSweeperApp {
+public class MyggSweeperApp extends Application {
   private Board board;
 
   public void init() {
     this.board = new BoardFactory().createBoard(4, 5, 1);
   }
 
-  public void start() {
-    Scanner scanner = new Scanner(System.in);
+  @Override
+  public void start(Stage stage) throws Exception {
 
-    while (true) {
-      displayBoard();
-      String coordinates = scanner.nextLine();
-      Tile tile =  this.board.getTiles().get(coordinates);
-      tile.execute();
-      if (tile.calculateNeighbouringMyggs() == 0) {
-        tile.revealNeighbours();
-      }
-    }
+    // Initialize scene controller with the stage
+    new SceneController(stage);
+
+    stage.setTitle("Myggsweeper");
+
+    // Show the main menu scene initially
+    SceneController.switchToMainMenu();
+
+    // Maximize the window by default
+    stage.setMaximized(true);
+
+    // Display the stage
+    stage.show();
   }
 
-  public void displayBoard() {
-    StringBuilder boardDisplay = new StringBuilder();
-
-    for (int i = 0; i < this.board.getRows(); i++) {
-      for (int j = 0; j < this.board.getColumns(); j++) {
-        Tile tile = this.board.getTile(i, j);
-        if (!tile.isRevealed()) {
-          boardDisplay.append("#");
-        } else if (tile.getTileType() == null) {
-          boardDisplay.append(tile.calculateNeighbouringMyggs());
-        } else if (tile.getTileType().getType().equals("MYGG")) {
-          boardDisplay.append("M");
-        }
-      }
-      boardDisplay.append("\n");
-    }
-
-    System.out.println(boardDisplay);
+  public static void appMain(String[] args) {
+    launch();
   }
 
 

@@ -62,7 +62,7 @@ public class Tile {
     this.isRevealed = state;
   }
 
-  public int calculateNeighbouringMyggs() {
+  public int getNeighbouringMyggs() {
     int myggs = 0;
 
     for (Tile neigbouringTile : this.neighbouringTiles) {
@@ -78,7 +78,7 @@ public class Tile {
     for (Tile neighbouringTile : this.neighbouringTiles) {
       if (!neighbouringTile.isRevealed()) {
         neighbouringTile.setRevealed(true);
-        if (neighbouringTile.calculateNeighbouringMyggs() == 0) {
+        if (neighbouringTile.getNeighbouringMyggs() == 0) {
           neighbouringTile.revealNeighbours();
         }
       }
@@ -89,6 +89,8 @@ public class Tile {
     setRevealed(true);
     if (this.tileType != null) {
       this.tileType.execute();
+    } else if (getNeighbouringMyggs() == 0) {
+      revealNeighbours();
     }
   }
 }
